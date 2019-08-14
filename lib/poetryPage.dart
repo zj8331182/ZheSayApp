@@ -4,8 +4,17 @@ import 'package:flutter/material.dart';
 import 'BitmapUtil.dart';
 
 Widget getPoetryPage(
-    _mainColor, List tags, title, dynasty, author, List content) {
-  return Stack(
+    _mainColor, List tags, String title, dynasty, author, List content) {
+  List<String> contentList = List();
+  var rep = new RegExp(r"，|。");
+  for (String s in content) {
+    contentList.addAll(s.split(rep));
+  }
+  contentList.removeWhere((element) {
+    return element == null || element.trim().isEmpty;
+  });
+  print(contentList);
+  return Column(
     children: <Widget>[
       Row(
         children: <Widget>[
@@ -60,14 +69,14 @@ Widget getPoetryPage(
                 fontSize: 40,
                 color: getReverseColor(_mainColor),
               ),
-              maxLines: 1,
+              maxLines: 2,
             ),
             Padding(
               padding: const EdgeInsets.all(16),
-              child: AutoSizeText(
+              child: Text(
                 "$dynasty $author",
                 style: TextStyle(
-                    fontSize: 35,
+                    fontSize: 25,
                     fontWeight: FontWeight.bold,
                     color: getReverseColor(_mainColor)),
                 maxLines: 1,
@@ -78,8 +87,8 @@ Widget getPoetryPage(
               child: ListView.builder(
                 shrinkWrap: true,
                 itemBuilder: (context, index) =>
-                    getContentItem(context, index, _mainColor, content),
-                itemCount: content.length,
+                    getContentItem(context, index, _mainColor, contentList),
+                itemCount: contentList.length,
               ),
             )
           ],
@@ -90,13 +99,15 @@ Widget getPoetryPage(
 }
 
 Widget getContentItem(
-    BuildContext context, int index, _mainColor, List contents) {
-  return Padding(
-    padding: const EdgeInsets.fromLTRB(8.0, 0, 8, 16),
-    child: AutoSizeText(
-      contents[index],
-      style: TextStyle(fontSize: 35, color: getReverseColor(_mainColor)),
-      maxLines: contents[0].length ~/ 12,
+    BuildContext context, int index, _mainColor, List<String> contents) {
+  return Center(
+    child: Padding(
+      padding: const EdgeInsets.fromLTRB(8.0, 0, 8, 16),
+      child: AutoSizeText(
+        contents[index],
+        style: TextStyle(fontSize: 35, color: getReverseColor(_mainColor)),
+        maxLines: 1,
+      ),
     ),
   );
 }
@@ -106,7 +117,10 @@ Widget getItem(BuildContext context, int index, _mainColor, List tags) {
     children: <Widget>[
       AutoSizeText(
         tags[index],
-        style: TextStyle(fontSize: 25, color: getReverseColor(_mainColor)),
+        style: TextStyle(
+            fontSize: 25,
+            color: _mainColor,
+            backgroundColor: getReverseColor(_mainColor)),
       ),
     ],
   );
