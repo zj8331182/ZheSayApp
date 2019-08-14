@@ -39,39 +39,39 @@ Widget topSpace(_mainColor, List tags) {
           ),
         ),
         Container(
-          width: 150,
+            width: 150,
             child: Column(
-          children: <Widget>[
-            ClipOval(
-              child: Container(
-                width: 75,
-                height: 75,
-                decoration: BoxDecoration(
-                  color: _mainColor,
+              children: <Widget>[
+                ClipOval(
+                  child: Container(
+                    width: 75,
+                    height: 75,
+                    decoration: BoxDecoration(
+                      color: _mainColor,
+                    ),
+                    child: Center(
+                      child: Text(
+                        "诗",
+                        style: TextStyle(
+                            fontSize: 50,
+                            color: getReverseColor(_mainColor),
+                            fontWeight: FontWeight.w500),
+                      ),
+                    ),
+                  ),
                 ),
-                child: Center(
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(60, 0, 0, 0),
                   child: Text(
-                    "诗",
+                    "词",
                     style: TextStyle(
                         fontSize: 50,
-                        color: getReverseColor(_mainColor),
+                        color: _mainColor,
                         fontWeight: FontWeight.w500),
                   ),
                 ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(60, 0, 0, 0),
-              child: Text(
-                "词",
-                style: TextStyle(
-                    fontSize: 50,
-                    color: _mainColor,
-                    fontWeight: FontWeight.w500),
-              ),
-            ),
-          ],
-        ))
+              ],
+            ))
       ],
     ),
   );
@@ -115,7 +115,8 @@ Widget getContentItem(
   return Center(
     child: AutoSizeText(
       contents[index],
-      style: TextStyle(fontSize: 25, color: getReverseColor(_mainColor)),
+      style: TextStyle(
+          fontSize: 200 / contents.length, color: getReverseColor(_mainColor)),
       maxLines: 1,
     ),
   );
@@ -133,7 +134,7 @@ Widget getItem(BuildContext context, int index, _mainColor, List tags) {
             child: AutoSizeText(
               tags[index],
               style: TextStyle(
-                fontSize: 25,
+                fontSize: 50 / tags.length,
                 color: _mainColor,
               ),
             ),
