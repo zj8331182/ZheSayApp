@@ -84,9 +84,9 @@ Container poetryView(
       mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
         AutoSizeText(
-          title,
+          title.substring(0,title.indexOf("/")),
           style: TextStyle(
-            fontSize: 30,
+            fontSize: 200 / contentList.length,
             color: getReverseColor(_mainColor),
           ),
           maxLines: 1,
