@@ -170,8 +170,10 @@ class _AppStateContentState extends State<AppStateContent> {
     var poeContent = await getPoetryContent(_poeToken);
     setState(() {
       _poeTitle = poeContent.data["data"]["origin"]["title"];
+      print("Title $_poeTitle");
       _poeAuthor = poeContent.data["data"]["origin"]["author"];
       _poeContent = poeContent.data["data"]["origin"]["content"];
+      print("Content $_poeContent");
       print(_poeContent.runtimeType);
       _poeDynasty = poeContent.data["data"]["origin"]["dynasty"];
       _poeTrags = poeContent.data["data"]["matchTags"];
